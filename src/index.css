@@ -88,3 +88,14 @@ button:focus-visible {
   height: 50px;
   width: 121px;
 }
+
+.logo:hover,
+.logo.react:hover,
+.myLogo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.githubLogo:hover {
+  filter: invert(78%) sepia(35%) saturate(624%) hue-rotate(137deg)
+    brightness(84%) contrast(84%);
+}

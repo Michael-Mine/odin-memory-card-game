@@ -3,7 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import myLogo from "./assets/logo.png";
 import githubLogo from "./assets/github-mark.svg";
-import "./App.css";
+// import "./App.css";
 import { Game } from "./components/Game";
 
 function App() {
