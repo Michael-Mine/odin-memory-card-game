@@ -1,43 +1,21 @@
+import { useEffect, useState } from "react";
+
 export function Game() {
   const currentScore = 1;
   const bestScore = 2;
   //   const json = getCards();
-  let cardImageURLs = [];
 
-  // wrap in useEffect?
-  async function getCards() {
-    const url = "https://ghibliapi.vercel.app/films/";
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const json = await response.json();
-      console.log(json);
-      cardImageURLs = getImageURLs(json);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-  // put images into array
-  function getImageURLs(json) {
-    const cardImageNumbers = [
-      0, 1, 2, 3, 5, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19,
-    ];
-    const cardImageURLs = [];
+  // const cardImageURLs = getCards();
+  const [cardImageURLs, setcardImageURLs] = useState(null);
 
-    cardImageNumbers.forEach((element) => {
-      cardImageURLs.push({
-        id: json[element].title,
-        image: json[element].image,
-      });
-    });
+  useEffect(() => {
+    fetch("https://ghibliapi.vercel.app/films/")
+      .then((response) => response.json())
+      .then((response) => setcardImageURLs(getImageURLs(response)))
+      .catch((error) => console.error(error));
+  }, []);
 
-    console.log(cardImageURLs);
-    return cardImageURLs;
-  }
-
-  getCards();
+  console.log(cardImageURLs);
 
   // function to display cards in random on click
 
@@ -50,6 +28,38 @@ export function Game() {
       <CardList list={cardImageURLs} />
     </div>
   );
+}
+
+// wrap in useEffect?
+async function getCards() {
+  try {
+    const response = await fetch("https://ghibliapi.vercel.app/films/");
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    // console.log(json);
+    return getImageURLs(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+// put images into array
+function getImageURLs(json) {
+  const cardImageNumbers = [
+    0, 1, 2, 3, 5, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19,
+  ];
+  const cardImageURLs = [];
+
+  cardImageNumbers.forEach((element) => {
+    cardImageURLs.push({
+      id: json[element].title,
+      image: json[element].image,
+    });
+  });
+
+  console.log(cardImageURLs);
+  return cardImageURLs;
 }
 
 function ListItem({ item }) {
