@@ -1,0 +1,13 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cards-item {
+  width: 200px;
+}
+
+/* button {
+  width: 300px;
+} */

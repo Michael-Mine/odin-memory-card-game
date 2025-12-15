@@ -1,17 +1,19 @@
+import "../styles/cards.css";
+
 function ListItem({ item }) {
   return (
-    <li>
-      <img src={item} alt="" srcset="" />
-    </li>
+    <button>
+      <img src={item} alt="" className="cards-item" />
+    </button>
   );
 }
 
 export function CardList({ list }) {
   return (
-    <ul>
+    <div className="cards-container">
       {list.map((item) => {
         return <ListItem key={item.id} item={item.image} />;
       })}
-    </ul>
+    </div>
   );
 }
