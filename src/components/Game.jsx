@@ -22,16 +22,27 @@ export function Game() {
   const currentScore = 1;
   const bestScore = 2;
 
-  const [cardImageURLs, setcardImageURLs] = useState(null);
+  const [cardImageURLs, setcardImageURLs] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://ghibliapi.vercel.app/films/")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((response) => setcardImageURLs(getImageURLs(response)))
-      .catch((error) => console.error(error));
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
   }, []);
 
   console.log(cardImageURLs);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>A network error was encountered</p>;
 
   // function to display cards in random on click
 
