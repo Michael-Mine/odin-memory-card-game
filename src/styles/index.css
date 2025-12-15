@@ -68,7 +68,7 @@ button:focus-visible {
   }
 }
 /* My styles */
-.footer {
+/* .footer {
   margin-top: 30px;
   display: flex;
   justify-content: center;
@@ -98,4 +98,4 @@ button:focus-visible {
 .githubLogo:hover {
   filter: invert(78%) sepia(35%) saturate(624%) hue-rotate(137deg)
     brightness(84%) contrast(84%);
-}
+} */

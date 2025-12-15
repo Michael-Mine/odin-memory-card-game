@@ -1,11 +1,27 @@
 import { useEffect, useState } from "react";
+import { CardList } from "./Cards";
+
+function getImageURLs(json) {
+  const cardImageNumbers = [
+    0, 1, 2, 3, 5, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19,
+  ];
+  const cardImageURLs = [];
+
+  cardImageNumbers.forEach((element) => {
+    cardImageURLs.push({
+      id: json[element].title,
+      image: json[element].image,
+    });
+  });
+
+  console.log(cardImageURLs);
+  return cardImageURLs;
+}
 
 export function Game() {
   const currentScore = 1;
   const bestScore = 2;
-  //   const json = getCards();
 
-  // const cardImageURLs = getCards();
   const [cardImageURLs, setcardImageURLs] = useState(null);
 
   useEffect(() => {
@@ -30,7 +46,6 @@ export function Game() {
   );
 }
 
-// wrap in useEffect?
 async function getCards() {
   try {
     const response = await fetch("https://ghibliapi.vercel.app/films/");
@@ -43,39 +58,4 @@ async function getCards() {
   } catch (error) {
     console.error(error.message);
   }
-}
-// put images into array
-function getImageURLs(json) {
-  const cardImageNumbers = [
-    0, 1, 2, 3, 5, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19,
-  ];
-  const cardImageURLs = [];
-
-  cardImageNumbers.forEach((element) => {
-    cardImageURLs.push({
-      id: json[element].title,
-      image: json[element].image,
-    });
-  });
-
-  console.log(cardImageURLs);
-  return cardImageURLs;
-}
-
-function ListItem({ item }) {
-  return (
-    <li>
-      <img src={item} alt="" srcset="" />
-    </li>
-  );
-}
-
-function CardList({ list }) {
-  return (
-    <ul>
-      {list.map((item) => {
-        return <ListItem key={item.id} item={item.image} />;
-      })}
-    </ul>
-  );
 }

@@ -1,0 +1,39 @@
+/* Default template styles */
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
+/* My styles */
+.footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.githubLogo {
+  height: 50px;
+  width: 50px;
+
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(41deg)
+    brightness(104%) contrast(105%);
+}
+
+.myLogo {
+  height: 50px;
+  width: 121px;
+}
+
+.logo:hover,
+.logo.react:hover,
+.myLogo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.githubLogo:hover {
+  filter: invert(78%) sepia(35%) saturate(624%) hue-rotate(137deg)
+    brightness(84%) contrast(84%);
+}
