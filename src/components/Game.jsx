@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CardList } from "./Cards";
 
-function getImageURLs(json) {
+function getMyImageURLs(json) {
   const cardImageNumbers = [
     0, 1, 2, 3, 5, 7, 8, 10, 11, 12, 14, 15, 16, 17, 18, 19,
   ];
@@ -18,10 +18,7 @@ function getImageURLs(json) {
   return cardImageURLs;
 }
 
-export function Game() {
-  const currentScore = 1;
-  const bestScore = 2;
-
+const useCardImageURL = () => {
   const [cardImageURLs, setcardImageURLs] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,12 +31,19 @@ export function Game() {
         }
         return response.json();
       })
-      .then((response) => setcardImageURLs(getImageURLs(response)))
+      .then((response) => setcardImageURLs(getMyImageURLs(response)))
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
 
   console.log(cardImageURLs);
+  return { cardImageURLs, error, loading };
+};
+
+export function Game() {
+  const currentScore = 1;
+  const bestScore = 2;
+  const { cardImageURLs, error, loading } = useCardImageURL();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>A network error was encountered</p>;
@@ -55,18 +59,4 @@ export function Game() {
       <CardList list={cardImageURLs} />
     </div>
   );
-}
-
-async function getCards() {
-  try {
-    const response = await fetch("https://ghibliapi.vercel.app/films/");
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    const json = await response.json();
-    // console.log(json);
-    return getImageURLs(json);
-  } catch (error) {
-    console.error(error.message);
-  }
 }
