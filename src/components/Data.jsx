@@ -24,7 +24,12 @@ export const useCardImageURL = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://ghibliapi.vercel.app/films/")
+    fetch("https://ghibliapi.vercel.app/films/", {
+      headers: {
+        "User-Agent": "mr-mine",
+      },
+      mode: "cors",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);

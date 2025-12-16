@@ -8,6 +8,6 @@ This is a React project from The Odin Project.
 
 By building from scratch my second React application, this will help solidify my recent learning of React components, JSX, keys, props, state and effects.
 
-Live Link:
+Live Link: https://mrmine-memory-card.netlify.app
 
-Screenshot:
+![Screenshot Link](./public/screenshot-memory-card.png)
