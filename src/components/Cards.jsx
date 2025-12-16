@@ -2,10 +2,13 @@ import "../styles/cards.css";
 
 function ListItem({ item, currentCards, setCurrentCards }) {
   const handleButtonClick = () => {
-    console.log(item.id);
-    const addID = [...currentCards, item.id];
-    console.log(addID);
-    setCurrentCards(addID);
+    if (!currentCards.includes(item.id)) {
+      const addID = [...currentCards, item.id];
+      console.log(addID);
+      setCurrentCards(addID);
+    } else {
+      setCurrentCards([]);
+    }
   };
 
   return (
