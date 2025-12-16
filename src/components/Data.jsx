@@ -13,7 +13,9 @@ function getMyImageURLs(json) {
     });
   });
 
-  return cardImageURLs;
+  const suffledList = cardImageURLs.sort(() => Math.random() - 0.5);
+
+  return suffledList;
 }
 
 export const useCardImageURL = () => {
