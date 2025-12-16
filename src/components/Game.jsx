@@ -14,7 +14,6 @@ function getMyImageURLs(json) {
     });
   });
 
-  // console.log(cardImageURLs);
   return cardImageURLs;
 }
 
@@ -36,13 +35,11 @@ const useCardImageURL = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // console.log(cardImageURLs);
-  return { cardImageURLs, error, loading };
+  return { cardImageURLs, setcardImageURLs, error, loading };
 };
 
 export function Game() {
-  const { cardImageURLs, error, loading } = useCardImageURL();
-
+  const { cardImageURLs, setcardImageURLs, error, loading } = useCardImageURL();
   const [currentCardsClicked, setCurrentCardsClicked] = useState([]);
   const [bestScore, setbestScore] = useState(0);
 
@@ -56,8 +53,6 @@ export function Game() {
     setbestScore(currentScore);
   }
 
-  // function to display cards in random on click
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>A network error was encountered</p>;
 
@@ -67,6 +62,7 @@ export function Game() {
       <p>Best Score: {bestScore}</p>
       <CardList
         list={cardImageURLs}
+        setList={setcardImageURLs}
         currentCards={currentCardsClicked}
         setCurrentCards={setCurrentCardsClicked}
       />

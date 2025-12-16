@@ -1,6 +1,11 @@
 import "../styles/cards.css";
 
-function ListItem({ item, currentCards, setCurrentCards }) {
+function shuffleList(list) {
+  const newList = list.sort(() => Math.random() - 0.5);
+  return newList;
+}
+
+function ListItem({ item, list, setList, currentCards, setCurrentCards }) {
   const handleButtonClick = () => {
     if (!currentCards.includes(item.id)) {
       const addID = [...currentCards, item.id];
@@ -9,6 +14,7 @@ function ListItem({ item, currentCards, setCurrentCards }) {
     } else {
       setCurrentCards([]);
     }
+    setList(shuffleList(list));
   };
 
   return (
@@ -18,7 +24,7 @@ function ListItem({ item, currentCards, setCurrentCards }) {
   );
 }
 
-export function CardList({ list, currentCards, setCurrentCards }) {
+export function CardList({ list, setList, currentCards, setCurrentCards }) {
   return (
     <div className="cards-container">
       {list.map((item) => {
@@ -26,6 +32,8 @@ export function CardList({ list, currentCards, setCurrentCards }) {
           <ListItem
             key={item.id}
             item={item}
+            list={list}
+            setList={setList}
             currentCards={currentCards}
             setCurrentCards={setCurrentCards}
           />
