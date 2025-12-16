@@ -41,22 +41,31 @@ const useCardImageURL = () => {
 };
 
 export function Game() {
-  const currentScore = 1;
-  const bestScore = 2;
   const { cardImageURLs, error, loading } = useCardImageURL();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>A network error was encountered</p>;
+  const [currentCardsClicked, setCurrentCardsClicked] = useState([]);
+
+  let currentScore = 0;
+  let bestScore = 0;
+
+  // if (setcurrentCardsClicked.length - 1 > 0) {
+  //   currentScore = setcurrentCardsClicked.length;
+  // }
 
   // function to display cards in random on click
 
-  // logic to remember which card for currentScore
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>A network error was encountered</p>;
 
   return (
     <div>
       <p>Current Score: {currentScore}</p>
       <p>Best Score: {bestScore}</p>
-      <CardList list={cardImageURLs} />
+      <CardList
+        list={cardImageURLs}
+        currentCards={currentCardsClicked}
+        setCurrentCards={setCurrentCardsClicked}
+      />
     </div>
   );
 }

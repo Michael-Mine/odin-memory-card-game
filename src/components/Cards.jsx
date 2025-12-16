@@ -1,18 +1,32 @@
 import "../styles/cards.css";
 
-function ListItem({ item }) {
+function ListItem({ item, currentCards, setCurrentCards }) {
+  const handleButtonClick = () => {
+    console.log(item.id);
+    const addID = [...currentCards, item.id];
+    console.log(addID);
+    setCurrentCards(addID);
+  };
+
   return (
-    <button>
-      <img src={item} alt="" className="cards-item" />
+    <button onClick={handleButtonClick}>
+      <img src={item.image} alt="" className="cards-item" />
     </button>
   );
 }
 
-export function CardList({ list }) {
+export function CardList({ list, currentCards, setCurrentCards }) {
   return (
     <div className="cards-container">
       {list.map((item) => {
-        return <ListItem key={item.id} item={item.image} />;
+        return (
+          <ListItem
+            key={item.id}
+            item={item}
+            currentCards={currentCards}
+            setCurrentCards={setCurrentCards}
+          />
+        );
       })}
     </div>
   );
